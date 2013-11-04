@@ -1,6 +1,7 @@
 var ejs = require('ejs')
   , fs = require('fs')
   , path = require('path')
+  , _ = require('underscore')
   , exists = fs.existsSync || path.existsSync
   , resolve = path.resolve
   , extname = path.extname
@@ -326,8 +327,7 @@ function partial(view, options){
       if ('string' == typeof name) {
         options[name] = object;
       } else if (name === global) {
-        // wtf?
-        // merge(options, object);
+        options = _.extend(options, object);
       }
     }
     // TODO Support other templates (but it's sync now...)
